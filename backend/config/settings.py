@@ -44,7 +44,7 @@ TEMPLATES = [{
         "django.contrib.messages.context_processors.messages",
     ]},
 }]
-WSGI_APPLICATION = "config.wsgi.app"
+WSGI_APPLICATION = "backend.config.wsgi.app"
 
 # Temporary test database connection requested for this project.
 # Move this value to DATABASE_URL in your deployment environment before production.
