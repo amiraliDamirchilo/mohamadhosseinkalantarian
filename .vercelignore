@@ -1,0 +1,7 @@
+backend/.env
+.venv
+node_modules
+.next
+.vinext
+dist
+staticfiles

@@ -8,8 +8,9 @@ from dotenv import load_dotenv
 # Always load the backend configuration, regardless of the working directory.
 load_dotenv(BASE_DIR / ".env")
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-change-this-before-production")
-DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+IS_VERCEL = os.getenv("VERCEL") == "1"
+DEBUG = os.getenv("DJANGO_DEBUG", "False" if IS_VERCEL else "True").lower() == "true"
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -43,7 +44,7 @@ TEMPLATES = [{
         "django.contrib.messages.context_processors.messages",
     ]},
 }]
-WSGI_APPLICATION = "config.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.app"
 
 # Temporary test database connection requested for this project.
 # Move this value to DATABASE_URL in your deployment environment before production.
@@ -71,9 +72,10 @@ USE_I18N = True
 USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR.parent / "public"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ImageKit media is uploaded by the server only. Keep the private key in .env.
-IMAGEKIT_PUBLIC_KEY = os.getenv("IMAGEKIT_PUBLIC_KEY", "")
-IMAGEKIT_PRIVATE_KEY = os.getenv("IMAGEKIT_PRIVATE_KEY", "")
+IMAGEKIT_PUBLIC_KEY = os.getenv("IMAGEKIT_PUBLIC_KEY", "public_eBE44vlCAKuKZDuBATrF2XmQiac=")
+IMAGEKIT_PRIVATE_KEY = os.getenv("IMAGEKIT_PRIVATE_KEY", "private_CuD2cQLuxDIjA3lzzOtjtzkxokg=")
 IMAGEKIT_URL_ENDPOINT = os.getenv("IMAGEKIT_URL_ENDPOINT", "https://ik.imagekit.io/3ba3xw4mnb")
