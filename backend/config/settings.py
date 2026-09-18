@@ -33,7 +33,7 @@ MIDDLEWARE = [
     "website.middleware.PublicApiCorsMiddleware",
 ]
 
-ROOT_URLCONF = "config.urls"
+ROOT_URLCONF = "backend.config.urls"
 TEMPLATES = [{
     "BACKEND": "django.template.backends.django.DjangoTemplates",
     "DIRS": [],
